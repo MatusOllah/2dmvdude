@@ -12,8 +12,9 @@ import (
 // rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "2dmvdude",
-	Short: "2DMVdude is a CLI tool for managing Project SEKAI 2DMVs.",
-	Long:  `2DMVdude is a CLI tool designed to help manage and manipulate 2D music videos (2DMVs) for Project SEKAI (PJSK).`,
+	Short: "2DMVdude is a CLI tool for managing Project SEKAI (PJSK) 2DMVs.",
+	Long: `2DMVdude is a CLI tool designed to help manage and manipulate 2D music videos (2DMVs)
+for the mobile rhythm game Project SEKAI: Colorful Stage! feat. Hatsune Miku.`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		if superVerbose {
 			fmt.Fprintln(os.Stderr, "Just use a debugger at this point 🤣")
