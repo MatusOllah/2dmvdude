@@ -2,7 +2,7 @@ package mv
 
 import "fmt"
 
-type MVKind int
+type MVKind uint8
 
 const (
 	MVKindOriginal MVKind = iota

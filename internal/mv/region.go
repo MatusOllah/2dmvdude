@@ -2,7 +2,7 @@ package mv
 
 import "fmt"
 
-type ServerRegion int
+type ServerRegion uint8
 
 const (
 	ServerRegionJP ServerRegion = iota
