@@ -6,8 +6,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/MatusOllah/2dmvtool/internal/adbutil"
-	"github.com/MatusOllah/2dmvtool/internal/mv"
+	"github.com/MatusOllah/2dmvdude/internal/adbutil"
+	"github.com/MatusOllah/2dmvdude/internal/mv"
 	"github.com/fatih/color"
 	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"

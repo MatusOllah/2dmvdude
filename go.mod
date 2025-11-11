@@ -1,4 +1,4 @@
-module github.com/MatusOllah/2dmvtool
+module github.com/MatusOllah/2dmvdude
 
 go 1.24.3
 
