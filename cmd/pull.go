@@ -106,7 +106,7 @@ func NewPullCommand() *cobra.Command {
 		Use:     "pull id",
 		Short:   "Pull a raw 2DMV from an Android device",
 		Long:    `Pull a raw CRI Sofdec 2DMV from an Android device using the specified song ID.`,
-		Example: `2dmvtool pull 514`, // example for FAKE HEART by KIRA feat. Kagamine Rin/Len (#514)
+		Example: `2dmvdude pull 264`, // MORE MORE JUMP! - Parasol Cider (#264)
 		Args:    cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
 			// parse song ID integer
