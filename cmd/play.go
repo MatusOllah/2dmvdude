@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"strconv"
+	"path/filepath"
 	"strings"
 
 	"github.com/fatih/color"
@@ -54,7 +54,7 @@ func playFile(path string, extraArgs []string) {
 		"-loglevel", "error",
 		"-stats",
 		"-volume", "100",
-		"-window_title", strconv.Quote(path + " - 2DMVdude"),
+		"-window_title", filepath.Base(path) + " - 2DMVdude",
 	}, extraArgs...)...)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
