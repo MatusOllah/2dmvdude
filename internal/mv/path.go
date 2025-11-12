@@ -7,7 +7,7 @@ var packageIDs = map[ServerRegion]string{
 	ServerRegionEN: "com.sega.ColorfulStage.en",
 	ServerRegionTW: "com.sega.ColorfulStage.tw",
 	ServerRegionKR: "com.sega.ColorfulStage.kr",
-	ServerRegionCN: "com.netease.colorfulstage",
+	ServerRegionCN: "com.tencent.pjsk",
 }
 
 // MVPath returns the file path for a 2DMV video based on the song ID, kind, and region.
