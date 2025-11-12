@@ -1,9 +1,13 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
+	"strconv"
+	"strings"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -26,9 +30,11 @@ func NewPlayCommand() *cobra.Command {
 			isFile := isLocalFile(args[0])
 
 			if isFile {
-				// Play local file
-				cmd := exec.Command("ffplay", "-i", args[0])
-				cmd.Args = append(cmd.Args, ffplayArgs)
+				extraArgs := []string{}
+				if ffplayArgs != "" {
+					extraArgs = strings.Fields(ffplayArgs)
+				}
+				playFile(args[0], extraArgs)
 			}
 		},
 	}
@@ -37,6 +43,28 @@ func NewPlayCommand() *cobra.Command {
 	c.Flags().StringVarP(&ffplayArgs, "ffplay-args", "a", "", "Additional arguments to pass to FFplay")
 
 	return c
+}
+
+func playFile(path string, extraArgs []string) {
+	// Play local file
+	cmd := exec.Command("ffplay", append([]string{
+		"-i", path,
+		"-autoexit",
+		"-hide_banner",
+		"-loglevel", "error",
+		"-stats",
+		"-volume", "100",
+		"-window_title", strconv.Quote(path + " - 2DMVdude"),
+	}, extraArgs...)...)
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+
+	if verbose {
+		fmt.Fprintln(os.Stderr, color.New(color.FgWhite, color.Bold).Sprint("FFplay command:"), cmd.String())
+	}
+
+	fmt.Fprintln(os.Stderr, "Playing...")
+	checkErr(cmd.Run())
 }
 
 func init() {
