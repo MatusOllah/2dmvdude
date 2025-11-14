@@ -58,3 +58,12 @@ func checkErr(err error) {
 		os.Exit(1)
 	}
 }
+
+func verbosePrintf(format string, a ...any) {
+	color.New(color.Faint).Fprintf(os.Stderr, "[verbose] "+format, a...)
+}
+
+func verbosePrintln(a ...any) {
+	color.New(color.Faint).Fprint(os.Stderr, "[verbose] ")
+	color.New(color.Faint).Fprintln(os.Stderr, a...)
+}

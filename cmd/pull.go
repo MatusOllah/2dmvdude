@@ -16,7 +16,7 @@ import (
 func pull(id int, dst string, serial string, kind mv.MVKind, region mv.ServerRegion, fallbackKind bool, force bool) error {
 	// open device
 	if verbose {
-		fmt.Fprintf(os.Stderr, "Opening device at ADB %s with serial number %s...\n", adbAddress, serial)
+		verbosePrintf("Opening device at ADB %s with serial number %s...\n", adbAddress, strconv.Quote(serial))
 	}
 	device, err := adbutil.OpenDevice(adbAddress, serial)
 	if err != nil {
@@ -24,7 +24,7 @@ func pull(id int, dst string, serial string, kind mv.MVKind, region mv.ServerReg
 	}
 
 	if verbose {
-		fmt.Fprintln(os.Stderr, "Device opened successfully.")
+		verbosePrintln("Device opened successfully.")
 		adbutil.PrintDeviceInfo(device)
 	}
 
@@ -78,7 +78,7 @@ func pull(id int, dst string, serial string, kind mv.MVKind, region mv.ServerReg
 	}()
 
 	if verbose {
-		fmt.Fprintf(os.Stderr, "Pulling remote file %s => %s (%d bytes)...\n", path, dst, size)
+		verbosePrintf("Pulling remote file %s => %s (%d bytes)...\n", path, dst, size)
 	}
 
 	// create progress bar
@@ -112,7 +112,7 @@ func NewPullCommand() *cobra.Command {
 			// parse song ID integer
 			id, err := strconv.Atoi(args[0])
 			if err != nil {
-				checkErr(fmt.Errorf("failed to parse song ID %s: %w", args[0], err))
+				checkErr(fmt.Errorf("failed to parse song ID %s: %w", strconv.Quote(args[0]), err))
 			}
 
 			if id <= 0 {
@@ -122,7 +122,7 @@ func NewPullCommand() *cobra.Command {
 			checkErr(pull(id, output, serial, kind, region, fallbackKind, force))
 
 			// success message
-			fmt.Fprintln(os.Stderr, color.GreenString("✅ Successfully pulled raw 2DMV!"))
+			fmt.Fprintln(os.Stderr, color.GreenString("✅ Successfully pulled 2DMV! -> %04d", id))
 		},
 	}
 

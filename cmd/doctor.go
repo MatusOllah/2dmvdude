@@ -20,7 +20,7 @@ func checkTool(name, cmd string) error {
 
 	fmt.Fprint(os.Stderr, color.HiGreenString("OK"))
 	if verbose {
-		fmt.Fprintf(os.Stderr, " (%s)", path)
+		color.New(color.Faint).Fprintf(os.Stderr, " (%s)", path)
 	}
 	fmt.Fprintln(os.Stderr)
 

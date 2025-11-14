@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -60,7 +59,7 @@ func playFile(path string, extraArgs []string) {
 	cmd.Stdout = os.Stdout
 
 	if verbose {
-		fmt.Fprintln(os.Stderr, color.New(color.FgWhite, color.Bold).Sprint("FFplay command:"), cmd.String())
+		verbosePrintln("FFplay command:", cmd.String())
 	}
 
 	fmt.Fprintln(os.Stderr, "Playing...")
