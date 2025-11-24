@@ -16,6 +16,7 @@ This command allows you to wipe the cache or view its status.`,
 	}
 
 	c.AddCommand(newPathCommand())
+	c.AddCommand(newWipeCommand())
 
 	return c
 }
