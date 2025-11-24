@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strconv"
 
 	"github.com/MatusOllah/2dmvdude/internal/adbutil"
@@ -68,6 +69,13 @@ func pull(id int, dst string, serial string, kind mv.MVKind, region mv.ServerReg
 			return fmt.Errorf("file %s already exists. Use --force to overwrite it", dst)
 		}
 	}
+
+	// create directory
+	dir := filepath.Dir(dst)
+	if verbose {
+		verbosePrintln("Creating directory:", dir)
+	}
+	checkErr(os.MkdirAll(dir, 0o700))
 
 	file, err := os.Create(dst)
 	checkErr(err)

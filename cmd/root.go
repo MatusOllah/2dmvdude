@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/MatusOllah/2dmvdude/cmd/cache"
 	"github.com/electricbubble/gadb"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
@@ -43,6 +44,8 @@ var (
 )
 
 func init() {
+	rootCmd.AddCommand(cache.NewCacheCommand())
+
 	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Print verbose output")
 
 	rootCmd.PersistentFlags().BoolVar(&superVerbose, "super-verbose", false, "Print super verbose output")
