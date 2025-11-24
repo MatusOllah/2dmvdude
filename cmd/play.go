@@ -7,8 +7,10 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/MatusOllah/2dmvdude/internal/mv"
+	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
 )
 
@@ -93,14 +95,29 @@ func playFile(path string, skipLeadin bool, extraArgs []string) {
 		args = append(args, "-ss", "9")
 	}
 	cmd := exec.Command("ffplay", append(args, extraArgs...)...)
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
+	//cmd.Stderr = os.Stderr
+	//cmd.Stdout = os.Stdout
 
 	if verbose {
 		verbosePrintln("FFplay command:", cmd.String())
 	}
 
-	fmt.Fprintln(os.Stderr, "Playing...")
+	pb := progressbar.NewOptions64(
+		-1,
+		progressbar.OptionSetDescription("Playing..."),
+		progressbar.OptionSetWriter(os.Stderr),
+		progressbar.OptionSetWidth(10),
+		progressbar.OptionSetElapsedTime(true),
+		progressbar.OptionThrottle(50*time.Millisecond),
+		progressbar.OptionOnCompletion(func() {
+			fmt.Fprint(os.Stderr, "\n")
+		}),
+		progressbar.OptionSpinnerType(14),
+		progressbar.OptionFullWidth(),
+		progressbar.OptionSetRenderBlankState(true),
+	)
+	defer pb.Exit()
+
 	checkErr(cmd.Run())
 }
 
