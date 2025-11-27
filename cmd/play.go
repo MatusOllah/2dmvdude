@@ -116,7 +116,9 @@ func playFile(path string, skipLeadin bool, extraArgs []string) {
 		progressbar.OptionFullWidth(),
 		progressbar.OptionSetRenderBlankState(true),
 	)
-	defer pb.Exit()
+	defer func() {
+		_ = pb.Exit()
+	}()
 
 	checkErr(cmd.Run())
 }
